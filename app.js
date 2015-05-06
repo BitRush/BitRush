@@ -11,6 +11,9 @@ var errorHandler = require('errorhandler');
 var lusca = require('lusca');
 var methodOverride = require('method-override');
 var multer  = require('multer');
+var Twitter = require('twit');
+var twitConfig = require('./config/twit.config');
+var twitter = new Twitter(twitConfig);
 
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')(session);
@@ -39,7 +42,8 @@ var passportConf = require('./config/passport');
  * Create Express server.
  */
 var app = express();
-
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 /**
  * Connect to MongoDB.
  */
@@ -199,5 +203,7 @@ app.use(errorHandler());
 app.listen(app.get('port'), function() {
   console.log('Express server listening on port %d in %s mode', app.get('port'), app.get('env'));
 });
+
+
 
 module.exports = app;
