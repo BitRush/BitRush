@@ -14,7 +14,8 @@ var multer  = require('multer');
 var Twitter = require('twit');
 var twitConfig = require('./config/twit.config');
 var twitter = new Twitter(twitConfig);
-
+var browserify = require('browserify');
+var reactify = require('reactify');
 var _ = require('lodash');
 var MongoStore = require('connect-mongo')(session);
 var flash = require('express-flash');
